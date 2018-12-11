@@ -6,7 +6,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c7f33e0-e9cf-4e84-85f5-50cb8428463a" name="Default" comment="" />
+    <list default="true" id="c86382bb-3e49-4fde-ae01-321957798af0" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,7 +31,7 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/jaodev/bluetoothmouse/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3162">
+            <state relative-caret-position="-2142">
               <caret line="48" column="13" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
             </state>
           </provider>
@@ -2076,6 +2076,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane" />
       <pane id="AndroidView">
         <subPane>
@@ -2100,14 +2101,13 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
-    <property name="sync.plugin.last.upgrade.timestamp" value="1544495768743" />
+    <property name="sync.plugin.last.upgrade.timestamp" value="1544496245325" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -2226,11 +2226,11 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="7c7f33e0-e9cf-4e84-85f5-50cb8428463a" name="Default" comment="" />
-      <created>1544495707256</created>
+      <changelist id="c86382bb-3e49-4fde-ae01-321957798af0" name="Default" comment="" />
+      <created>1544496192547</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1544495707256</updated>
+      <updated>1544496192547</updated>
     </task>
     <servers />
   </component>
@@ -2275,7 +2275,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/src/main/java/jaodev/bluetoothmouse/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3162">
+        <state relative-caret-position="-2142">
           <caret line="48" column="13" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
         </state>
       </provider>

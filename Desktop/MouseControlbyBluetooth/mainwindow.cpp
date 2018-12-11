@@ -170,23 +170,46 @@ void MainWindow::readSocket()
             secuencia_x[2]=(x/100)-400;
             secuencia_y[2]=(y/100)-400;
             qDebug()<<secuencia_x[2]<<endl<<secuencia_y[2]<<endl<<endl;
-            if (secuencia_x[2]-secuencia_x[1]-secuencia_x[0]<-0.5){
-                if (pos_x- 3>=0)
-                    pos_x-= 3;
+            if (secuencia_x[2]-0.85*secuencia_x[1]-0.5*secuencia_x[0]<-0.5&&secuencia_x[2]-0.85*secuencia_x[1]-0.5*secuencia_x[0]>-1){
+                if (pos_x-2>=0)
+                    pos_x-=2;
             }
-            if (secuencia_x[2]-secuencia_x[1]-secuencia_x[0]>0.5){
-                if (pos_x+3<=width)
-                    pos_x+=3;
+
+            if (secuencia_x[2]-0.85*secuencia_x[1]-0.5*secuencia_x[0]<-1){
+                if (pos_x-4>=0)
+                    pos_x-=4;
             }
-            if (secuencia_y[2]-secuencia_y[1]-secuencia_y[0]<-0.5){
-                if (pos_y-3>=0)
-                    pos_y-=3;
+
+            if (secuencia_x[2]-0.85*secuencia_x[1]-0.5*secuencia_x[0]>0.5&&secuencia_x[2]-0.85*secuencia_x[1]-0.5*secuencia_x[0]<1){
+                if (pos_x+2<=width)
+                    pos_x+=2;
             }
+
+            if (secuencia_x[2]-0.85*secuencia_x[1]-0.5*secuencia_x[0]>1){
+                if (pos_x+4<=width)
+                    pos_x+=4;
+            }
+
+            if (secuencia_y[2]-0.85*secuencia_y[1]-0.5*secuencia_y[0]<-0.5&&secuencia_y[2]-0.85*secuencia_y[1]-0.5*secuencia_y[0]>-1){
+                if (pos_y-2>=0)
+                    pos_y-=2;
+            }
+
+            if (secuencia_y[2]-0.85*secuencia_y[1]-0.5*secuencia_y[0]<-1){
+                if (pos_y-4>=0)
+                    pos_y-=4;
+            }
+
                     //incremento -1 pos_y
-            if (secuencia_y[2]-secuencia_y[1]-secuencia_y[0]>0.5){
-                if (pos_y+3<=height)
-                    pos_y+=3;
+            if (secuencia_y[2]-0.85*secuencia_y[1]-0.5*secuencia_y[0]>0.5&&secuencia_y[2]-0.85*secuencia_y[1]-0.5*secuencia_y[0]<1){
+                if (pos_y+2<=height)
+                    pos_y+=2;
             }
+            if (secuencia_y[2]-0.85*secuencia_y[1]-0.5*secuencia_y[0]>1){
+                if (pos_y+4<=height)
+                    pos_y+=4;
+            }
+
             secuencia_x[0]=secuencia_x[1];
             secuencia_y[0]=secuencia_y[1];
             secuencia_x[1]=secuencia_x[2];
