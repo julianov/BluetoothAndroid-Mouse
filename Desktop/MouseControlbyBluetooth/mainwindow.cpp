@@ -94,9 +94,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
         sendMessage(QString::number(100));
 
-     tengo_x, tengo_y, tengo_z=false;
+     tengo_x, tengo_y=false;
 
-     x, y, z=0;
+     x, y=0;
      primera_vez=true;
      segunda_vez=true;
      pos_x=pos_y=0;
@@ -147,10 +147,7 @@ void MainWindow::readSocket()
             tengo_y=true;
             y=(pByte[i+1]*256)+pByte[i+2];
         }
-        if(pByte[i]=='z'&&i<array.length()-2){
-            tengo_z=true;
-            z=(pByte[i+1]*256)+pByte[i+2];
-        }
+
 
         if(pByte[i]=='i'&&pByte[i+1]=='p'){
 
@@ -180,10 +177,10 @@ void MainWindow::readSocket()
 
     }
 
-    if (tengo_x&&tengo_y&&tengo_z){
+    if (tengo_x&&tengo_y){
 
        // qDebug()<<(x/100)-300<<endl<<(y/100)-300<<endl<<(z/100)-300<<endl<<endl;
-        tengo_x=tengo_y=tengo_z=false;
+        tengo_x=tengo_y=false;
         if (primera_vez){
            secuencia_x[0]=(x/100)-400;
            secuencia_y[0]=(y/100)-400;
@@ -209,20 +206,19 @@ void MainWindow::readSocket()
             {
 
 
-            for (int i =1; i<20;i++)
+            for (int i =1; i<25;i++)
             {
                if (secuencia_x[2]-0.5*secuencia_x[1]-0.25*secuencia_x[0]<-0.5*i&&secuencia_x[2]-0.5*secuencia_x[1]-0.25*secuencia_x[0]>-1*i){
-
-                   if (i==19)
+                   if (i==24)
                    {
-                       if (pos_x-19>=0)
-                           pos_x-=19;
-                           break;
+                       if (pos_x-24>=0)
+                           pos_x-=24;
+                       break;
                    }
                    else{
                         if (pos_x-2*i>=0){
                              pos_x-=2*i;
-                             break;
+                        break;
                         }
                   }
                }
@@ -230,20 +226,20 @@ void MainWindow::readSocket()
                        /////
 
 
-                       for (int i =1; i<20;i++)
+                       for (int i =1; i<25;i++)
                        {
                           if (secuencia_x[2]-0.5*secuencia_x[1]-0.25*secuencia_x[0]>0.5*i&&secuencia_x[2]-0.5*secuencia_x[1]-0.25*secuencia_x[0]<1*i){
 
-                              if (i==19)
+                              if (i==24)
                               {
-                                  if (pos_x+19<=width)
-                                      pos_x+=19;
-                                      break;
+                                  if (pos_x+24<=width)
+                                      pos_x+=24;
+                                  break;
                               }
                               else{
                                    if (pos_x+2*i<=width){
                                         pos_x+=2*i;
-                                        break;
+                                   break;
                                    }
                              }
                           }
@@ -256,20 +252,20 @@ void MainWindow::readSocket()
             if (!(abs(secuencia_y[2])<abs((secuencia_x[2])/2)))
             {
 
-                       for (int i =1; i<20;i++)
+                       for (int i =1; i<25;i++)
                        {
                           if (secuencia_y[2]-0.5*secuencia_y[1]-0.25*secuencia_y[0]<-0.5*i&&secuencia_y[2]-0.5*secuencia_y[1]-0.25*secuencia_y[0]>-1*i){
 
-                              if (i==19)
+                              if (i==24)
                               {
-                                  if (pos_y-19>=0)
-                                      pos_y-=19;
-                                      break;
+                                  if (pos_y-24>=0)
+                                      pos_y-=24;
+                                  break;
                               }
                               else{
                                    if (pos_y-2*i>=0){
                                         pos_y-=2*i;
-                                        break;
+                                   break;
                                    }
                              }
                           }
@@ -279,29 +275,26 @@ void MainWindow::readSocket()
                        /////
 
 
-                    for (int i =1; i<20;i++)
+                    for (int i =1; i<25;i++)
                     {
                        if (secuencia_y[2]-0.5*secuencia_y[1]-0.25*secuencia_y[0]>0.5*i&&secuencia_y[2]-0.5*secuencia_y[1]-0.25*secuencia_y[0]<1*i){
 
-                           if (i==19)
+                           if (i==24)
                            {
-                               if (pos_y+19<=height)
-                                   pos_y+=19;
-                                   break;
+                               if (pos_y+24<=height)
+                                   pos_y+=24;
+                               break;
                            }
                            else{
                                 if (pos_y+2*i<=height){
                                      pos_y+=2*i;
-                                     break;
+                                break;
                                 }
                           }
                        }
                     }
 
-
-
-
-}
+            }
             secuencia_x[0]=secuencia_x[1];
             secuencia_y[0]=secuencia_y[1];
             secuencia_x[1]=secuencia_x[2];

@@ -63,8 +63,8 @@ private:
     QBluetoothServiceInfo serviceInfo;
     QList<QBluetoothSocket *> clientSockets;
 
-    bool tengo_x, tengo_y, tengo_z;
-    float x, y, z;
+    bool tengo_x, tengo_y;
+    float x, y;
 
     bool primera_vez, segunda_vez;
 
