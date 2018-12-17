@@ -7,6 +7,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    Input=new INPUT;
+      Input->type      = INPUT_MOUSE;
+      ZeroMemory(Input, sizeof(*Input));
+
    /* int x, y;
     x=100;
     y=40;
@@ -147,6 +152,32 @@ void MainWindow::readSocket()
             z=(pByte[i+1]*256)+pByte[i+2];
         }
 
+        if(pByte[i]=='i'&&pByte[i+1]=='p'){
+
+              Input->mi.dwFlags  = MOUSEEVENTF_LEFTDOWN;
+            SendInput(1,Input,sizeof(INPUT));
+
+            Input->mi.dwFlags  = MOUSEEVENTF_LEFTUP;
+            SendInput(1,Input,sizeof(INPUT));
+
+
+            ZeroMemory(Input, sizeof(*Input));
+
+        }
+
+        if(pByte[i]=='d'&&pByte[i+1]=='p'){
+
+              Input->mi.dwFlags  = MOUSEEVENTF_RIGHTDOWN;
+            SendInput(1,Input,sizeof(INPUT));
+
+            Input->mi.dwFlags  = MOUSEEVENTF_RIGHTUP;
+            SendInput(1,Input,sizeof(INPUT));
+
+
+            ZeroMemory(Input, sizeof(*Input));
+
+        }
+
     }
 
     if (tengo_x&&tengo_y&&tengo_z){
@@ -169,47 +200,108 @@ void MainWindow::readSocket()
         else{
             secuencia_x[2]=(x/100)-400;
             secuencia_y[2]=(y/100)-400;
+            secuencia_y[2]=-secuencia_y[2];
+            secuencia_x[2]=-secuencia_x[2];
+
             qDebug()<<secuencia_x[2]<<endl<<secuencia_y[2]<<endl<<endl;
-            if (secuencia_x[2]-0.85*secuencia_x[1]-0.5*secuencia_x[0]<-0.5&&secuencia_x[2]-0.85*secuencia_x[1]-0.5*secuencia_x[0]>-1){
-                if (pos_x-2>=0)
-                    pos_x-=2;
-            }
 
-            if (secuencia_x[2]-0.85*secuencia_x[1]-0.5*secuencia_x[0]<-1){
-                if (pos_x-4>=0)
-                    pos_x-=4;
-            }
+            if (!(abs(secuencia_x[2])<abs((secuencia_y[2])/2)))
+            {
 
-            if (secuencia_x[2]-0.85*secuencia_x[1]-0.5*secuencia_x[0]>0.5&&secuencia_x[2]-0.85*secuencia_x[1]-0.5*secuencia_x[0]<1){
-                if (pos_x+2<=width)
-                    pos_x+=2;
-            }
 
-            if (secuencia_x[2]-0.85*secuencia_x[1]-0.5*secuencia_x[0]>1){
-                if (pos_x+4<=width)
-                    pos_x+=4;
-            }
+            for (int i =1; i<20;i++)
+            {
+               if (secuencia_x[2]-0.5*secuencia_x[1]-0.25*secuencia_x[0]<-0.5*i&&secuencia_x[2]-0.5*secuencia_x[1]-0.25*secuencia_x[0]>-1*i){
 
-            if (secuencia_y[2]-0.85*secuencia_y[1]-0.5*secuencia_y[0]<-0.5&&secuencia_y[2]-0.85*secuencia_y[1]-0.5*secuencia_y[0]>-1){
-                if (pos_y-2>=0)
-                    pos_y-=2;
-            }
+                   if (i==19)
+                   {
+                       if (pos_x-19>=0)
+                           pos_x-=19;
+                           break;
+                   }
+                   else{
+                        if (pos_x-2*i>=0){
+                             pos_x-=2*i;
+                             break;
+                        }
+                  }
+               }
+}
+                       /////
 
-            if (secuencia_y[2]-0.85*secuencia_y[1]-0.5*secuencia_y[0]<-1){
-                if (pos_y-4>=0)
-                    pos_y-=4;
-            }
 
-                    //incremento -1 pos_y
-            if (secuencia_y[2]-0.85*secuencia_y[1]-0.5*secuencia_y[0]>0.5&&secuencia_y[2]-0.85*secuencia_y[1]-0.5*secuencia_y[0]<1){
-                if (pos_y+2<=height)
-                    pos_y+=2;
-            }
-            if (secuencia_y[2]-0.85*secuencia_y[1]-0.5*secuencia_y[0]>1){
-                if (pos_y+4<=height)
-                    pos_y+=4;
-            }
+                       for (int i =1; i<20;i++)
+                       {
+                          if (secuencia_x[2]-0.5*secuencia_x[1]-0.25*secuencia_x[0]>0.5*i&&secuencia_x[2]-0.5*secuencia_x[1]-0.25*secuencia_x[0]<1*i){
 
+                              if (i==19)
+                              {
+                                  if (pos_x+19<=width)
+                                      pos_x+=19;
+                                      break;
+                              }
+                              else{
+                                   if (pos_x+2*i<=width){
+                                        pos_x+=2*i;
+                                        break;
+                                   }
+                             }
+                          }
+
+}
+
+               }
+                       /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            if (!(abs(secuencia_y[2])<abs((secuencia_x[2])/2)))
+            {
+
+                       for (int i =1; i<20;i++)
+                       {
+                          if (secuencia_y[2]-0.5*secuencia_y[1]-0.25*secuencia_y[0]<-0.5*i&&secuencia_y[2]-0.5*secuencia_y[1]-0.25*secuencia_y[0]>-1*i){
+
+                              if (i==19)
+                              {
+                                  if (pos_y-19>=0)
+                                      pos_y-=19;
+                                      break;
+                              }
+                              else{
+                                   if (pos_y-2*i>=0){
+                                        pos_y-=2*i;
+                                        break;
+                                   }
+                             }
+                          }
+                       }
+
+
+                       /////
+
+
+                    for (int i =1; i<20;i++)
+                    {
+                       if (secuencia_y[2]-0.5*secuencia_y[1]-0.25*secuencia_y[0]>0.5*i&&secuencia_y[2]-0.5*secuencia_y[1]-0.25*secuencia_y[0]<1*i){
+
+                           if (i==19)
+                           {
+                               if (pos_y+19<=height)
+                                   pos_y+=19;
+                                   break;
+                           }
+                           else{
+                                if (pos_y+2*i<=height){
+                                     pos_y+=2*i;
+                                     break;
+                                }
+                          }
+                       }
+                    }
+
+
+
+
+}
             secuencia_x[0]=secuencia_x[1];
             secuencia_y[0]=secuencia_y[1];
             secuencia_x[1]=secuencia_x[2];

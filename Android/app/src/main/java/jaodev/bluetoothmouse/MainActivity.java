@@ -62,11 +62,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ArrayAdapter<String> mBTArrayAdapter;
     private ListView mDevicesListView;
     private CheckBox mLED1;
+    private Button btn_izquierdo;
+    private Button btn_derecho;
+
+
     // private EditText texto_a_enviar;
     //private Button enviar_texto;
 
 
     boolean isConnected;
+    boolean derecho;
 
     private Handler mHandler; // Our main handler that will receive callback notifications
     private ConnectedThread mConnectedThread; // bluetooth background worker thread to send and receive data
@@ -98,6 +103,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         isConnected=false;
+        derecho=false;
+
         scheduleTaskExecutor = Executors.newScheduledThreadPool(1);
         scheduleTaskExecutor.scheduleAtFixedRate(new Runnable() {
             public void run() {
@@ -112,6 +119,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
             }
         }, 0, 125, TimeUnit.MILLISECONDS);
+
+        btn_izquierdo=(Button)findViewById(R.id.button_izquierdo);
+        btn_izquierdo.setVisibility(View.INVISIBLE);
+        btn_izquierdo.setOnClickListener(new View.OnClickListener() {
+                                           @Override
+                                           public void onClick(View v) {
+                                               mConnectedThread.write((byte) 'i');
+                                               mConnectedThread.write((byte) 'p');
+                                           }
+                                       });
+
+        btn_derecho=(Button)findViewById(R.id.button_derecho);
+        btn_derecho.setVisibility(View.INVISIBLE);
+        btn_derecho.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mConnectedThread.write((byte) 'd');
+                mConnectedThread.write((byte) 'p');
+            }
+        });
+
 
         mBluetoothStatus = (TextView)findViewById(R.id.bluetoothStatus);
 
@@ -145,6 +173,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (msg.what == CONNECTING_STATUS) {
                     if (msg.arg1 == 1) {
                         mBluetoothStatus.setText("Connected to Device: " + (String) (msg.obj));
+                        btn_izquierdo.setVisibility(View.VISIBLE);
+                        btn_derecho.setVisibility(View.VISIBLE);
+
                     } else {
                         mBluetoothStatus.setText("Connection Failed");
                         isConnected=false;
@@ -152,6 +183,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         mOffBtn.setVisibility(View.VISIBLE);
                         mDiscoverBtn.setVisibility(View.VISIBLE);
                         mListPairedDevicesBtn.setVisibility(View.VISIBLE);
+
+                        btn_izquierdo.setVisibility(View.INVISIBLE);
+                        btn_derecho.setVisibility(View.INVISIBLE);
+
 
                     }
                 }
@@ -404,6 +439,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mConnectedThread.write((byte) 'z');
             mConnectedThread.write(stream[4]);
             mConnectedThread.write(stream[5]);
+
 
         }
     }

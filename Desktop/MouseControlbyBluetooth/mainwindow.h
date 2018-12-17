@@ -25,6 +25,8 @@
 
 #include <QtMath>
 
+#include <QThread>
+
 namespace Ui {
 class MainWindow;
 }
@@ -72,6 +74,8 @@ private:
     int pos_x, pos_y;
 
     int height, width;
+
+    INPUT    *Input;
 
 };
 
